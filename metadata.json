@@ -1,0 +1,6 @@
+{
+  "name": "Sainik Canteen Bikram",
+  "description": "Quality Electronics & Everyday Essentials in Bikram, Bihar. Explore products, check prices, and contact store.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
