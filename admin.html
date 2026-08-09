@@ -3,560 +3,163 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sainik Canteen Bikram | Admin Panel</title>
+  <title>Sainik Canteen - Admin Panel</title>
 
   <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family:Arial,sans-serif;
+      background:#07110c;
+      color:#fff;
     }
-
-    body {
-      font-family: Arial, sans-serif;
-      background: #101810;
-      color: #fff;
-      min-height: 100vh;
+    .container{
+      max-width:900px;
+      margin:auto;
+      padding:20px;
     }
-
-    .hidden {
-      display: none !important;
+    .card{
+      background:#101c15;
+      border:1px solid rgba(212,175,55,.35);
+      border-radius:18px;
+      padding:22px;
+      margin-bottom:20px;
     }
-
-    .login-page {
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
-      background:
-        linear-gradient(rgba(10,20,12,.88), rgba(10,20,12,.96)),
-        url("background.jpg") center/cover fixed;
+    h1,h2{color:#e0b93f}
+    input,textarea,select{
+      width:100%;
+      padding:13px;
+      margin:7px 0 14px;
+      border-radius:9px;
+      border:1px solid #45624d;
+      background:#07110c;
+      color:#fff;
+      font-size:15px;
     }
-
-    .login-box {
-      width: 100%;
-      max-width: 420px;
-      background: rgba(20,35,22,.96);
-      border: 1px solid rgba(212,175,55,.45);
-      border-radius: 22px;
-      padding: 30px;
-      box-shadow: 0 20px 60px rgba(0,0,0,.5);
+    textarea{min-height:100px;resize:vertical}
+    button{
+      border:0;
+      border-radius:9px;
+      padding:12px 18px;
+      font-weight:bold;
+      cursor:pointer;
+      margin:4px;
     }
-
-    .logo {
-      width: 90px;
-      height: 90px;
-      object-fit: cover;
-      border-radius: 50%;
-      display: block;
-      margin: 0 auto 15px;
-      border: 3px solid #d4af37;
-      background: #fff;
+    .gold{background:#d4af37;color:#07110c}
+    .red{background:#b83232;color:white}
+    .green{background:#159447;color:white}
+    .hidden{display:none}
+    .product{
+      border:1px solid rgba(212,175,55,.25);
+      border-radius:14px;
+      padding:15px;
+      margin:12px 0;
+      background:#0b1710;
     }
-
-    h1 {
-      text-align: center;
-      color: #f1d56b;
-      margin-bottom: 5px;
+    .product img{
+      width:100px;
+      height:100px;
+      object-fit:cover;
+      border-radius:10px;
+      margin-bottom:10px;
     }
-
-    .subtitle {
-      text-align: center;
-      color: #9ad8b5;
-      margin-bottom: 25px;
+    .logout{
+      float:right;
+      background:#b83232;
+      color:white;
     }
-
-    label {
-      display: block;
-      margin: 14px 0 7px;
-      color: #e6c95b;
-      font-weight: bold;
-    }
-
-    input, select, textarea {
-      width: 100%;
-      padding: 13px;
-      border-radius: 10px;
-      border: 1px solid rgba(212,175,55,.35);
-      background: #172319;
-      color: white;
-      outline: none;
-      font-size: 15px;
-    }
-
-    textarea {
-      min-height: 90px;
-      resize: vertical;
-    }
-
-    input:focus, select:focus, textarea:focus {
-      border-color: #d4af37;
-    }
-
-    button {
-      border: 0;
-      cursor: pointer;
-      border-radius: 10px;
-      padding: 12px 18px;
-      font-weight: bold;
-      font-size: 14px;
-    }
-
-    .gold-btn {
-      width: 100%;
-      margin-top: 20px;
-      background: #d4af37;
-      color: #111;
-    }
-
-    .gold-btn:hover {
-      background: #f0d365;
-    }
-
-    .error {
-      color: #ff7777;
-      text-align: center;
-      margin-top: 12px;
-    }
-
-    .dashboard {
-      min-height: 100vh;
-    }
-
-    .topbar {
-      position: sticky;
-      top: 0;
-      z-index: 10;
-      background: rgba(13,25,15,.97);
-      border-bottom: 1px solid rgba(212,175,55,.25);
-      padding: 15px 20px;
-    }
-
-    .topbar-inner {
-      max-width: 1200px;
-      margin: auto;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 15px;
-    }
-
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .brand img {
-      width: 48px;
-      height: 48px;
-      border-radius: 50%;
-      object-fit: cover;
-      background: white;
-      border: 2px solid #d4af37;
-    }
-
-    .brand h2 {
-      font-size: 18px;
-      color: #f1d56b;
-    }
-
-    .brand span {
-      font-size: 12px;
-      color: #9ad8b5;
-    }
-
-    .logout {
-      background: #8b2d2d;
-      color: white;
-    }
-
-    .container {
-      max-width: 1200px;
-      margin: auto;
-      padding: 25px 18px 50px;
-    }
-
-    .welcome {
-      margin-bottom: 20px;
-    }
-
-    .welcome h1 {
-      text-align: left;
-      margin-bottom: 5px;
-    }
-
-    .stats {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 15px;
-      margin-bottom: 25px;
-    }
-
-    .stat {
-      background: #172319;
-      border: 1px solid rgba(212,175,55,.25);
-      border-radius: 16px;
-      padding: 20px;
-    }
-
-    .stat strong {
-      display: block;
-      font-size: 28px;
-      color: #f1d56b;
-    }
-
-    .stat span {
-      color: #9ad8b5;
-    }
-
-    .panel {
-      background: #172319;
-      border: 1px solid rgba(212,175,55,.25);
-      border-radius: 18px;
-      padding: 22px;
-      margin-bottom: 25px;
-    }
-
-    .panel h2 {
-      color: #f1d56b;
-      margin-bottom: 18px;
-    }
-
-    .form-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 5px 18px;
-    }
-
-    .full {
-      grid-column: 1 / -1;
-    }
-
-    .preview {
-      width: 120px;
-      height: 120px;
-      object-fit: cover;
-      border-radius: 14px;
-      border: 1px solid #d4af37;
-      margin-top: 10px;
-      background: #101810;
-    }
-
-    .actions {
-      display: flex;
-      gap: 8px;
-      margin-top: 15px;
-    }
-
-    .save {
-      background: #d4af37;
-      color: #111;
-    }
-
-    .clear {
-      background: #344638;
-      color: white;
-    }
-
-    .products {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 18px;
-    }
-
-    .product {
-      overflow: hidden;
-      border-radius: 15px;
-      border: 1px solid rgba(212,175,55,.25);
-      background: #101810;
-    }
-
-    .product img {
-      width: 100%;
-      height: 190px;
-      object-fit: cover;
-      background: #222;
-    }
-
-    .product-info {
-      padding: 15px;
-    }
-
-    .product-info h3 {
-      color: white;
-      margin-bottom: 7px;
-    }
-
-    .category {
-      color: #8fd0a8;
-      font-size: 13px;
-    }
-
-    .price {
-      color: #f1d56b;
-      font-size: 18px;
-      font-weight: bold;
-      margin: 8px 0;
-    }
-
-    .product-buttons {
-      display: flex;
-      gap: 8px;
-      margin-top: 12px;
-    }
-
-    .edit {
-      background: #275f46;
-      color: white;
-      flex: 1;
-    }
-
-    .delete {
-      background: #842d2d;
-      color: white;
-      flex: 1;
-    }
-
-    .empty {
-      text-align: center;
-      color: #8fb49b;
-      padding: 30px;
-      grid-column: 1 / -1;
-    }
-
-    @media (max-width: 800px) {
-      .stats,
-      .products {
-        grid-template-columns: repeat(2, 1fr);
-      }
-    }
-
-    @media (max-width: 600px) {
-      .form-grid,
-      .stats,
-      .products {
-        grid-template-columns: 1fr;
-      }
-
-      .full {
-        grid-column: auto;
-      }
-
-      .topbar-inner {
-        align-items: flex-start;
-      }
-
-      .brand h2 {
-        font-size: 15px;
-      }
-
-      .container {
-        padding: 20px 12px 40px;
-      }
-
-      .panel {
-        padding: 16px;
-      }
+    .status{
+      padding:10px;
+      border-radius:8px;
+      margin:10px 0;
+      background:#14261a;
     }
   </style>
 </head>
 
 <body>
 
+<div class="container">
+
   <!-- LOGIN -->
-  <section id="loginPage" class="login-page">
-    <div class="login-box">
+  <div id="loginBox" class="card">
+    <h1>🇮🇳 Sainik Canteen</h1>
+    <h2>Admin Login</h2>
 
-      <img
-        src="sainik_canteen_logo.jpg"
-        class="logo"
-        alt="Sainik Canteen Bikram">
+    <label>Username</label>
+    <input id="username" type="text" placeholder="Username">
 
+    <label>Password</label>
+    <input id="password" type="password" placeholder="Password">
+
+    <button class="gold" onclick="login()">LOGIN</button>
+
+    <div id="loginError"></div>
+  </div>
+
+  <!-- ADMIN -->
+  <div id="adminPanel" class="hidden">
+
+    <div class="card">
+      <button class="logout" onclick="logout()">Logout</button>
       <h1>Admin Panel</h1>
-      <p class="subtitle">Sainik Canteen Bikram</p>
-
-      <label>Username</label>
-      <input
-        type="text"
-        id="username"
-        placeholder="Enter username"
-        autocomplete="username">
-
-      <label>Password</label>
-      <input
-        type="password"
-        id="password"
-        placeholder="Enter password"
-        autocomplete="current-password">
-
-      <button class="gold-btn" onclick="login()">
-        LOGIN
-      </button>
-
-      <p id="loginError" class="error"></p>
+      <p>Sainik Canteen Bikram</p>
+      <div id="status" class="status">Firebase connected</div>
     </div>
-  </section>
 
+    <!-- ADD PRODUCT -->
+    <div class="card">
+      <h2>Add Product</h2>
 
-  <!-- DASHBOARD -->
-  <section id="dashboard" class="dashboard hidden">
+      <label>Product Name</label>
+      <input id="productName" placeholder="Example: Samsung Smart TV">
 
-    <header class="topbar">
-      <div class="topbar-inner">
+      <label>Category</label>
+      <select id="productCategory">
+        <option value="Electronics">Electronics</option>
+        <option value="Home Appliances">Home Appliances</option>
+        <option value="Mobile">Mobile</option>
+        <option value="TV">TV</option>
+        <option value="Refrigerator">Refrigerator</option>
+        <option value="Other">Other</option>
+      </select>
 
-        <div class="brand">
-          <img
-            src="sainik_canteen_logo.jpg"
-            alt="Logo">
+      <label>Price</label>
+      <input id="productPrice" type="number" placeholder="Example: 29999">
 
-          <div>
-            <h2>Sainik Canteen Bikram</h2>
-            <span>Product Admin Panel</span>
-          </div>
-        </div>
+      <label>Image URL</label>
+      <input id="productImage" placeholder="https://example.com/product.jpg">
 
-        <button class="logout" onclick="logout()">
-          Logout
-        </button>
+      <label>Description</label>
+      <textarea id="productDescription" placeholder="Product details"></textarea>
 
-      </div>
-    </header>
+      <button class="green" onclick="addProduct()">ADD PRODUCT</button>
+    </div>
 
+    <!-- PRODUCT LIST -->
+    <div class="card">
+      <h2>Product List</h2>
+      <div id="productList">Loading products...</div>
+    </div>
 
-    <main class="container">
+  </div>
+</div>
 
-      <div class="welcome">
-        <h1>Dashboard</h1>
-        <p class="subtitle" style="text-align:left">
-          Manage your store products
-        </p>
-      </div>
+<script type="module">
 
+  import {
+    collection,
+    addDoc,
+    getDocs,
+    deleteDoc,
+    doc,
+    updateDoc,
+    serverTimestamp
+  } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
-      <!-- STATS -->
-      <div class="stats">
+  import { db } from "./firebase.js";
 
-        <div class="stat">
-          <strong id="totalProducts">0</strong>
-          <span>Total Products</span>
-        </div>
-
-        <div class="stat">
-          <strong id="totalCategories">0</strong>
-          <span>Categories</span>
-        </div>
-
-        <div class="stat">
-          <strong id="storeStatus">OPEN</strong>
-          <span>Store Status</span>
-        </div>
-
-      </div>
-
-
-      <!-- ADD PRODUCT -->
-      <div class="panel">
-
-        <h2 id="formTitle">➕ Add New Product</h2>
-
-        <input type="hidden" id="editId">
-
-        <div class="form-grid">
-
-          <div>
-            <label>Product Name *</label>
-            <input
-              id="productName"
-              type="text"
-              placeholder="Example: Samsung Smart TV">
-          </div>
-
-          <div>
-            <label>Category *</label>
-            <select id="productCategory">
-              <option value="">Select Category</option>
-              <option>Smart TVs</option>
-              <option>Refrigerators</option>
-              <option>Washing Machines</option>
-              <option>Coolers & Fans</option>
-              <option>Electronics</option>
-              <option>Home Appliances</option>
-              <option>Other</option>
-            </select>
-          </div>
-
-          <div>
-            <label>Price</label>
-            <input
-              id="productPrice"
-              type="text"
-              placeholder="Example: ₹25,999">
-          </div>
-
-          <div>
-            <label>Product Image *</label>
-            <input
-              id="productImage"
-              type="file"
-              accept="image/*"
-              onchange="previewImage(event)">
-          </div>
-
-          <div class="full">
-            <label>Description</label>
-            <textarea
-              id="productDescription"
-              placeholder="Enter product details..."></textarea>
-          </div>
-
-          <div class="full">
-            <img
-              id="imagePreview"
-              class="preview hidden"
-              alt="Image preview">
-          </div>
-
-        </div>
-
-        <div class="actions">
-          <button class="save" onclick="saveProduct()">
-            💾 Save Product
-          </button>
-
-          <button class="clear" onclick="clearForm()">
-            Clear
-          </button>
-        </div>
-
-      </div>
-
-
-      <!-- PRODUCTS -->
-      <div class="panel">
-
-        <h2>📦 Products</h2>
-
-        <div id="productsList" class="products"></div>
-
-      </div>
-
-    </main>
-
-  </section>
-
-
-<script>
-
-  /* =========================
-     LOGIN
-  ========================= */
-
-  const ADMIN_USERNAME = "canteen";
-  const ADMIN_PASSWORD = "Bikram";
-
-  function login() {
+  window.login = function(){
 
     const username =
       document.getElementById("username").value.trim();
@@ -564,76 +167,34 @@
     const password =
       document.getElementById("password").value;
 
-    if (
-      username === ADMIN_USERNAME &&
-      password === ADMIN_PASSWORD
-    ) {
+    if(username === "canteen" && password === "Bikram"){
 
-      sessionStorage.setItem("adminLoggedIn", "true");
+      sessionStorage.setItem("canteenAdmin","true");
 
-      document
-        .getElementById("loginPage")
-        .classList.add("hidden");
+      document.getElementById("loginBox").classList.add("hidden");
+      document.getElementById("adminPanel").classList.remove("hidden");
 
-      document
-        .getElementById("dashboard")
-        .classList.remove("hidden");
+      loadProducts();
 
-      renderProducts();
+    }else{
 
-    } else {
-
-      document.getElementById("loginError").textContent =
-        "❌ Wrong username or password";
+      document.getElementById("loginError").innerHTML =
+        "<p style='color:#ff6b6b'>Wrong username or password.</p>";
 
     }
-  }
+  };
 
 
-  function logout() {
+  window.logout = function(){
 
-    sessionStorage.removeItem("adminLoggedIn");
+    sessionStorage.removeItem("canteenAdmin");
 
     location.reload();
 
-  }
+  };
 
 
-  /* =========================
-     PRODUCTS
-  ========================= */
-
-  let products =
-    JSON.parse(localStorage.getItem("canteenProducts") || "[]");
-
-  let selectedImage = "";
-
-
-  function previewImage(event) {
-
-    const file = event.target.files[0];
-
-    if (!file) return;
-
-    const reader = new FileReader();
-
-    reader.onload = function(e) {
-
-      selectedImage = e.target.result;
-
-      const preview =
-        document.getElementById("imagePreview");
-
-      preview.src = selectedImage;
-      preview.classList.remove("hidden");
-
-    };
-
-    reader.readAsDataURL(file);
-  }
-
-
-  function saveProduct() {
+  window.addProduct = async function(){
 
     const name =
       document.getElementById("productName").value.trim();
@@ -642,285 +203,187 @@
       document.getElementById("productCategory").value;
 
     const price =
-      document.getElementById("productPrice").value.trim();
+      document.getElementById("productPrice").value;
+
+    const image =
+      document.getElementById("productImage").value.trim();
 
     const description =
       document.getElementById("productDescription").value.trim();
 
-    const editId =
-      document.getElementById("editId").value;
 
+    if(!name || !price){
 
-    if (!name || !category) {
-
-      alert("Product name aur category zaroor bharo.");
-
+      alert("Product name and price are required.");
       return;
+
     }
 
 
-    if (!editId && !selectedImage) {
+    try{
 
-      alert("Product image select karo.");
+      await addDoc(collection(db,"products"),{
 
-      return;
-    }
-
-
-    if (editId) {
-
-      const index =
-        products.findIndex(p => p.id == editId);
-
-      if (index !== -1) {
-
-        products[index].name = name;
-        products[index].category = category;
-        products[index].price = price;
-        products[index].description = description;
-
-        if (selectedImage) {
-          products[index].image = selectedImage;
-        }
-
-      }
-
-    } else {
-
-      products.push({
-
-        id: Date.now(),
-
-        name: name,
-
-        category: category,
-
-        price: price,
-
-        description: description,
-
-        image: selectedImage
+        name:name,
+        category:category,
+        price:Number(price),
+        image:image,
+        description:description,
+        createdAt:serverTimestamp()
 
       });
 
+
+      alert("Product added successfully ✅");
+
+
+      document.getElementById("productName").value="";
+      document.getElementById("productPrice").value="";
+      document.getElementById("productImage").value="";
+      document.getElementById("productDescription").value="";
+
+
+      loadProducts();
+
+    }catch(error){
+
+      console.error(error);
+
+      alert(
+        "Product add nahi hua.\n\n" +
+        error.message
+      );
+
     }
 
-
-    localStorage.setItem(
-      "canteenProducts",
-      JSON.stringify(products)
-    );
+  };
 
 
-    clearForm();
-    renderProducts();
-
-    alert("✅ Product saved successfully!");
-
-  }
-
-
-  function renderProducts() {
+  window.loadProducts = async function(){
 
     const list =
-      document.getElementById("productsList");
+      document.getElementById("productList");
 
-    document.getElementById("totalProducts").textContent =
-      products.length;
-
-
-    const categories =
-      new Set(products.map(p => p.category));
-
-    document.getElementById("totalCategories").textContent =
-      categories.size;
+    list.innerHTML="Loading...";
 
 
-    if (products.length === 0) {
+    try{
+
+      const snapshot =
+        await getDocs(collection(db,"products"));
+
+
+      if(snapshot.empty){
+
+        list.innerHTML =
+          "<p>No products found.</p>";
+
+        return;
+
+      }
+
+
+      list.innerHTML="";
+
+
+      snapshot.forEach((item)=>{
+
+        const p=item.data();
+
+
+        const div=document.createElement("div");
+
+        div.className="product";
+
+
+        div.innerHTML=`
+
+          ${
+            p.image
+            ? `<img src="${p.image}" alt="${p.name}">`
+            : ""
+          }
+
+          <h3>${p.name || ""}</h3>
+
+          <p>
+            <b>Category:</b>
+            ${p.category || ""}
+          </p>
+
+          <p>
+            <b>Price:</b>
+            ₹${p.price || 0}
+          </p>
+
+          <p>
+            ${p.description || ""}
+          </p>
+
+          <button
+            class="red"
+            onclick="deleteProduct('${item.id}')">
+            DELETE
+          </button>
+
+        `;
+
+
+        list.appendChild(div);
+
+      });
+
+
+    }catch(error){
+
+      console.error(error);
 
       list.innerHTML =
-        '<div class="empty">No products added yet.</div>';
+        "<p style='color:#ff6b6b'>" +
+        error.message +
+        "</p>";
 
-      return;
     }
 
+  };
 
-    list.innerHTML =
-      products.map(product => `
 
-        <div class="product">
+  window.deleteProduct = async function(id){
 
-          <img
-            src="${product.image}"
-            alt="${escapeHTML(product.name)}">
+    if(!confirm("Delete this product?")) return;
 
-          <div class="product-info">
 
-            <h3>${escapeHTML(product.name)}</h3>
+    try{
 
-            <div class="category">
-              ${escapeHTML(product.category)}
-            </div>
+      await deleteDoc(
+        doc(db,"products",id)
+      );
 
-            <div class="price">
-              ${escapeHTML(product.price || "Price on request")}
-            </div>
+      alert("Product deleted ✅");
 
-            <p style="color:#9ad8b5;font-size:13px">
-              ${escapeHTML(product.description || "")}
-            </p>
+      loadProducts();
 
-            <div class="product-buttons">
+    }catch(error){
 
-              <button
-                class="edit"
-                onclick="editProduct(${product.id})">
-                ✏️ Edit
-              </button>
+      alert(error.message);
 
-              <button
-                class="delete"
-                onclick="deleteProduct(${product.id})">
-                🗑️ Delete
-              </button>
+    }
 
-            </div>
+  };
 
-          </div>
 
-        </div>
+  // Keep login after page refresh
+  if(sessionStorage.getItem("canteenAdmin")==="true"){
 
-      `).join("");
+    document.getElementById("loginBox").classList.add("hidden");
 
-  }
+    document.getElementById("adminPanel").classList.remove("hidden");
 
-
-  function editProduct(id) {
-
-    const product =
-      products.find(p => p.id == id);
-
-    if (!product) return;
-
-
-    document.getElementById("editId").value =
-      product.id;
-
-    document.getElementById("productName").value =
-      product.name;
-
-    document.getElementById("productCategory").value =
-      product.category;
-
-    document.getElementById("productPrice").value =
-      product.price;
-
-    document.getElementById("productDescription").value =
-      product.description;
-
-
-    selectedImage = product.image;
-
-    const preview =
-      document.getElementById("imagePreview");
-
-    preview.src = product.image;
-    preview.classList.remove("hidden");
-
-
-    document.getElementById("formTitle").textContent =
-      "✏️ Edit Product";
-
-
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth"
-    });
-
-  }
-
-
-  function deleteProduct(id) {
-
-    const ok =
-      confirm("Kya aap ye product delete karna chahte ho?");
-
-    if (!ok) return;
-
-
-    products =
-      products.filter(p => p.id != id);
-
-
-    localStorage.setItem(
-      "canteenProducts",
-      JSON.stringify(products)
-    );
-
-
-    renderProducts();
-
-  }
-
-
-  function clearForm() {
-
-    document.getElementById("editId").value = "";
-
-    document.getElementById("productName").value = "";
-
-    document.getElementById("productCategory").value = "";
-
-    document.getElementById("productPrice").value = "";
-
-    document.getElementById("productDescription").value = "";
-
-    document.getElementById("productImage").value = "";
-
-    selectedImage = "";
-
-    document
-      .getElementById("imagePreview")
-      .classList.add("hidden");
-
-    document.getElementById("formTitle").textContent =
-      "➕ Add New Product";
-
-  }
-
-
-  function escapeHTML(text) {
-
-    const div = document.createElement("div");
-
-    div.textContent = text || "";
-
-    return div.innerHTML;
-
-  }
-
-
-  /* =========================
-     AUTO LOGIN CHECK
-  ========================= */
-
-  if (
-    sessionStorage.getItem("adminLoggedIn") === "true"
-  ) {
-
-    document
-      .getElementById("loginPage")
-      .classList.add("hidden");
-
-    document
-      .getElementById("dashboard")
-      .classList.remove("hidden");
-
-    renderProducts();
+    loadProducts();
 
   }
 
 </script>
 
 </body>
-  </html>
+</html>
