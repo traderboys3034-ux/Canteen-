@@ -2112,26 +2112,8 @@
     startFirebaseProducts();
 
   </script>
-  <script>
-    function toggleAllProducts() {
-      const grid = document.getElementById('product-grid');
-      const btnLabel = document.getElementById('show-all-products-label');
-      const icon = document.getElementById('show-all-products-icon');
-      if (!grid || !btnLabel) return;
-
-      const expanded = grid.classList.toggle('show-only-five') === false;
-      btnLabel.textContent = expanded ? 'SHOW LESS' : 'SHOW ALL PRODUCTS';
-
-      if (icon) {
-        icon.setAttribute('data-lucide', expanded ? 'chevron-up' : 'chevron-down');
-        if (window.lucide) window.lucide.createIcons();
-      }
-    }
-
-    document.addEventListener('DOMContentLoaded', function () {
-      const grid = document.getElementById('product-grid');
-      if (grid) grid.classList.add('show-only-five');
-    });
+  
+    
 
 
 </body>
